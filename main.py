@@ -10,70 +10,70 @@ logger = get_logger(__name__)
 
 def parse_args():
     """
-    解析命令行参数.
+    Phân tích các tham số dòng lệnh.
     """
-    parser = argparse.ArgumentParser(description="小智Ai客户端")
+    parser = argparse.ArgumentParser(description="Ứng dụng AI XiaoZhi")
     parser.add_argument(
         "--mode",
         choices=["gui", "cli"],
         default="gui",
-        help="运行模式：gui(图形界面) 或 cli(命令行)",
+        help="Chế độ chạy: gui (giao diện đồ họa) hoặc cli (dòng lệnh)",
     )
     parser.add_argument(
         "--protocol",
         choices=["mqtt", "websocket"],
         default="websocket",
-        help="通信协议：mqtt 或 websocket",
+        help="Giao thức giao tiếp: mqtt hoặc websocket",
     )
     parser.add_argument(
         "--skip-activation",
         action="store_true",
-        help="跳过激活流程，直接启动应用（仅用于调试）",
+        help="Bỏ qua quy trình kích hoạt và khởi động ứng dụng ngay (chỉ dùng cho chế độ thử nghiệm)",
     )
     return parser.parse_args()
 
 
 async def handle_activation(mode: str) -> bool:
-    """处理设备激活流程，依赖已有事件循环.
+    """Xử lý quy trình kích hoạt thiết bị, phụ thuộc vào vòng lặp sự kiện hiện có.
 
     Args:
-        mode: 运行模式，"gui"或"cli"
+        mode: Chế độ chạy, "gui" hoặc "cli"
 
     Returns:
-        bool: 激活是否成功
+        bool: Kết quả kích hoạt thành công hay không
     """
     try:
         from src.core.system_initializer import SystemInitializer
 
-        logger.info("开始设备激活流程检查...")
+        logger.info("Đang kiểm tra quy trình kích hoạt thiết bị...")
 
         system_initializer = SystemInitializer()
-        # 统一使用 SystemInitializer 内的激活处理，GUI/CLI 自适应
+        # Dùng chung xử lý kích hoạt trong SystemInitializer, tự động thích ứng với GUI/CLI
         result = await system_initializer.handle_activation_process(mode=mode)
         success = bool(result.get("is_activated", False))
-        logger.info(f"激活流程完成，结果: {success}")
+        logger.info(f"Quy trình kích hoạt hoàn thành, kết quả: {success}")
         return success
     except Exception as e:
-        logger.error(f"激活流程异常: {e}", exc_info=True)
+        logger.error(f"Quy trình kích hoạt gặp sự cố: {e}", exc_info=True)
         return False
 
 
 async def start_app(mode: str, protocol: str, skip_activation: bool) -> int:
     """
-    启动应用的统一入口（在已有事件循环中执行）.
+    Điểm vào chung để khởi động ứng dụng (thực hiện trong vòng lặp sự kiện hiện có).
     """
-    logger.info("启动小智AI客户端")
+    logger.info("Khởi động ứng dụng AI XiaoZhi")
 
-    # 处理激活流程
+    # Xử lý quy trình kích hoạt
     if not skip_activation:
         activation_success = await handle_activation(mode)
         if not activation_success:
-            logger.error("设备激活失败，程序退出")
+            logger.error("Kích hoạt thiết bị thất bại, ứng dụng sẽ thoát")
             return 1
     else:
-        logger.warning("跳过激活流程（调试模式）")
+        logger.warning("Bỏ qua quy trình kích hoạt (chế độ thử nghiệm)")
 
-    # 创建并启动应用程序
+    # Tạo và khởi động ứng dụng
     app = Application.get_instance()
     return await app.run(mode=mode, protocol=protocol)
 
@@ -85,35 +85,35 @@ if __name__ == "__main__":
         setup_logging()
 
         if args.mode == "gui":
-            # 在GUI模式下，由main统一创建 QApplication 与 qasync 事件循环
+            # Trong chế độ GUI, main sẽ tạo QApplication và vòng lặp sự kiện qasync
             try:
                 import qasync
                 from PyQt5.QtWidgets import QApplication
             except ImportError as e:
-                logger.error(f"GUI模式需要qasync和PyQt5库: {e}")
+                logger.error(f"Chế độ GUI yêu cầu thư viện qasync và PyQt5: {e}")
                 sys.exit(1)
 
             qt_app = QApplication.instance() or QApplication(sys.argv)
 
             loop = qasync.QEventLoop(qt_app)
             asyncio.set_event_loop(loop)
-            logger.info("已在main中创建qasync事件循环")
+            logger.info("Đã tạo vòng lặp qasync trong main")
 
             with loop:
                 exit_code = loop.run_until_complete(
                     start_app(args.mode, args.protocol, args.skip_activation)
                 )
         else:
-            # CLI模式使用标准asyncio事件循环
+            # Chế độ CLI sử dụng vòng lặp sự kiện asyncio chuẩn
             exit_code = asyncio.run(
                 start_app(args.mode, args.protocol, args.skip_activation)
             )
 
     except KeyboardInterrupt:
-        logger.info("程序被用户中断")
+        logger.info("Ứng dụng bị người dùng ngắt")
         exit_code = 0
     except Exception as e:
-        logger.error(f"程序异常退出: {e}", exc_info=True)
+        logger.error(f"Ứng dụng thoát vì lỗi: {e}", exc_info=True)
         exit_code = 1
     finally:
         sys.exit(exit_code)

@@ -873,11 +873,11 @@ class Application:
             if state == DeviceState.IDLE:
                 perform_idle = True
             elif state == DeviceState.CONNECTING:
-                display_update = ("连接中...", False)
+                display_update = ("Connecting...", False)
             elif state == DeviceState.LISTENING:
                 perform_listening = True
             elif state == DeviceState.SPEAKING:
-                display_update = ("说话中...", True)
+                display_update = ("Speaking...", True)
 
         # 锁外执行I/O与耗时操作
         if perform_idle:
@@ -893,7 +893,7 @@ class Application:
         处理空闲状态.
         """
         # UI更新异步执行（待命：默认视为未连接）
-        self._update_display_async(self.display.update_status, "待命", False)
+        self._update_display_async(self.display.update_status, "Standby", False)
 
         # 设置表情
         self.set_emotion("neutral")
@@ -903,7 +903,7 @@ class Application:
         处理监听状态.
         """
         # UI更新异步执行（聆听中：连接已建立）
-        self._update_display_async(self.display.update_status, "聆听中...", True)
+        self._update_display_async(self.display.update_status, "Listening...", True)
 
         # 设置表情
         self.set_emotion("neutral")

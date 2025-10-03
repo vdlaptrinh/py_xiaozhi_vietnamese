@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>参数配置</string>
+   <string>Parameter configuration</string>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -24,7 +24,7 @@
      </property>
      <widget class="QWidget" name="system_tab">
       <attribute name="title">
-       <string>系统选项</string>
+       <string>System options</string>
       </attribute>
       <layout class="QVBoxLayout" name="system_layout">
        <item>
@@ -51,7 +51,7 @@
            <item row="0" column="0">
             <widget class="QLabel" name="client_id_label">
              <property name="text">
-              <string>客户端ID:</string>
+              <string>Client ID:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignVCenter</set>
@@ -71,7 +71,7 @@
            <item row="1" column="0">
             <widget class="QLabel" name="device_id_label">
              <property name="text">
-              <string>设备ID:</string>
+              <string>Device ID:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignVCenter</set>
@@ -269,7 +269,7 @@
      </widget>
      <widget class="QWidget" name="wake_word_tab">
       <attribute name="title">
-       <string>唤醒词</string>
+       <string>Wake-up word</string>
       </attribute>
       <layout class="QVBoxLayout" name="wake_word_layout">
        <item>
@@ -296,7 +296,7 @@
            <item row="0" column="0">
             <widget class="QLabel" name="use_wake_word_label">
              <property name="text">
-              <string>启用唤醒词:</string>
+              <string>Enable wake word:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignVCenter</set>
@@ -309,7 +309,7 @@
            <item row="1" column="0">
             <widget class="QLabel" name="model_path_label">
              <property name="text">
-              <string>模型路径:</string>
+              <string>Model Path:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignVCenter</set>
@@ -324,7 +324,7 @@
              <item>
               <widget class="QPushButton" name="model_path_btn">
                <property name="text">
-                <string>浏览</string>
+                <string>Browse</string>
                </property>
               </widget>
              </item>
@@ -333,7 +333,7 @@
            <item row="2" column="0">
             <widget class="QLabel" name="wake_words_label">
              <property name="text">
-              <string>唤醒词列表:</string>
+              <string>Wake-up word list:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTop</set>
@@ -351,7 +351,7 @@
                 </size>
                </property>
                <property name="placeholderText">
-                <string>每行一个唤醒词</string>
+                <string>One wake word per line</string>
                </property>
               </widget>
              </item>
@@ -375,7 +375,7 @@
      </widget>
      <widget class="QWidget" name="camera_tab">
       <attribute name="title">
-       <string>摄像头</string>
+       <string>Camera</string>
       </attribute>
       <layout class="QVBoxLayout" name="camera_layout">
        <item>
@@ -402,7 +402,7 @@
            <item row="0" column="0">
             <widget class="QLabel" name="camera_index_label">
              <property name="text">
-              <string>摄像头索引:</string>
+              <string>Camera index:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignVCenter</set>
@@ -422,7 +422,7 @@
            <item row="1" column="0">
             <widget class="QLabel" name="frame_width_label">
              <property name="text">
-              <string>画面宽度:</string>
+              <string>screen width:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignVCenter</set>
@@ -448,7 +448,7 @@
            <item row="2" column="0">
             <widget class="QLabel" name="frame_height_label">
              <property name="text">
-              <string>画面高度:</string>
+              <string>screen height:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignVCenter</set>
@@ -474,7 +474,7 @@
            <item row="3" column="0">
             <widget class="QLabel" name="fps_label">
              <property name="text">
-              <string>帧率:</string>
+              <string>Frame rate:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignVCenter</set>
@@ -563,21 +563,21 @@
      <item>
       <widget class="QPushButton" name="reset_btn">
        <property name="text">
-        <string>重置</string>
+        <string>Đặt lại</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="save_btn">
        <property name="text">
-        <string>保存</string>
+        <string>Lưu</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="cancel_btn">
        <property name="text">
-        <string>取消</string>
+        <string>Hủy</string>
        </property>
       </widget>
      </item>

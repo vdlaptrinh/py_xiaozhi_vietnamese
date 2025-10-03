@@ -89,7 +89,7 @@ class GuiDisplay(BaseDisplay, QObject, metaclass=CombinedMeta):
         手动模式按钮按下事件处理.
         """
         if self.manual_btn and self.manual_btn.isVisible():
-            self.manual_btn.setText("松开以停止")
+            self.manual_btn.setText("Release to stop")
         if self.button_press_callback:
             self.button_press_callback()
 
@@ -98,7 +98,7 @@ class GuiDisplay(BaseDisplay, QObject, metaclass=CombinedMeta):
         手动模式按钮释放事件处理.
         """
         if self.manual_btn and self.manual_btn.isVisible():
-            self.manual_btn.setText("按住后说话")
+            self.manual_btn.setText("Press and hold to speak")
         if self.button_release_callback:
             self.button_release_callback()
 
@@ -127,10 +127,10 @@ class GuiDisplay(BaseDisplay, QObject, metaclass=CombinedMeta):
         self.auto_mode = not self.auto_mode
 
         if self.auto_mode:
-            self._update_mode_button_status("自动对话")
+            self._update_mode_button_status("Automatic conversation")
             self._switch_to_auto_mode()
         else:
-            self._update_mode_button_status("手动对话")
+            self._update_mode_button_status("Manual conversation")
             self._switch_to_manual_mode()
 
     def _switch_to_auto_mode(self):
@@ -153,7 +153,7 @@ class GuiDisplay(BaseDisplay, QObject, metaclass=CombinedMeta):
         """
         更新状态文本并处理相关逻辑.
         """
-        full_status_text = f"状态: {status}"
+        full_status_text = f"State: {status}"
         self._safe_update_label(self.status_label, full_status_text)
 
         # 既跟踪状态文本变化，也跟踪连接状态变化
@@ -190,7 +190,7 @@ class GuiDisplay(BaseDisplay, QObject, metaclass=CombinedMeta):
             try:
                 self._set_emotion_asset(self.emotion_label, asset_path)
             except Exception as e:
-                self.logger.error(f"设置表情GIF时发生错误: {str(e)}")
+                self.logger.error(f"An error occurred while setting the GIF expression: {str(e)}")
 
     def _get_emotion_asset_path(self, emotion_name: str) -> str:
         """
@@ -292,7 +292,7 @@ class GuiDisplay(BaseDisplay, QObject, metaclass=CombinedMeta):
                 label.setPixmap(pixmap)
 
         except Exception as e:
-            self.logger.error(f"设置GIF动画失败: {e}")
+            self.logger.error(f"Failed to set GIF animation: {e}")
             label.setText("😊")
 
     def _safe_update_label(self, label, text):
@@ -303,7 +303,7 @@ class GuiDisplay(BaseDisplay, QObject, metaclass=CombinedMeta):
             try:
                 label.setText(text)
             except RuntimeError as e:
-                self.logger.error(f"更新标签失败: {e}")
+                self.logger.error(f"Failed to update label: {e}")
 
     async def close(self):
         """

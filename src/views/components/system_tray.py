@@ -77,9 +77,9 @@ class SystemTray(QObject):
             try:
                 from PyQt5.QtCore import QTimer
 
-                QTimer.singleShot(0, lambda: self.update_status("待命", connected=True))
+                QTimer.singleShot(0, lambda: self.update_status("Standby", connected=True))
             except Exception:
-                self.update_status("待命", connected=True)
+                self.update_status("Standby", connected=True)
 
             # 显示系统托盘图标
             self.tray_icon.show()
